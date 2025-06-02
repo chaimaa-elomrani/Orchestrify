@@ -20,12 +20,12 @@ class AuthService {
 
     public function login ($email , $password){
 
-        if(Auth::attempt(['email' => $email, 'password' => $password])){
+        if(!Auth::attempt(['email' => $email, 'password' => $password])){
             return false; 
         }
 
         $user = User::where('email', $email)->first();
-        $user->profile_completed =true ; 
+    
         $user->save(); 
 
         return $user ; 

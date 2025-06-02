@@ -81,8 +81,8 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="flex items-center space-x-4">
-                        <a href="login.html" class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300">Login</a>
-                        <a href="register.html" class="px-5 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors duration-300">Register</a>
+                        <a href="/login" class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300">Login</a>
+                        <a href="/register" class="px-5 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors duration-300">Register</a>
                     </div>
                 </div>
                 <div class="md:hidden">

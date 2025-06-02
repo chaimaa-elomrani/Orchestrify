@@ -91,16 +91,10 @@
                 </div>
 
                 <!-- Registration Form -->
-                <form action="{{ route('register') }}" method="POST" class="space-y-6">
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label for="fullName" class="block text-sm font-medium text-gray-300">
-                                Full Name *
-                            </label>
-                            <input type="text" id="fullName" name="name" required
-                                class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
-                        </div>
+                   
 
                         <div class="space-y-2">
                             <label for="email" class="block text-sm font-medium text-gray-300">
@@ -117,32 +111,11 @@
                             <input type="password" id="password" name="password" required
                                 class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
                         </div>
-                        <div class="space-y-2">
-                            <label for="role" name="role" class="block text-sm font-medium text-gray-300">
-                                Choose Your Role *
-                            </label>
-                            <select id="role" name="role" required
-                                class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
-                                <option name="role">Select your role</option>
-                                <option value="chef">Conductor</option>
-                                <option value="musicien">Musician</option>
-
-                            </select>
-                        </div>
+                  
                     </div>
 
                     <div class="space-y-4">
-                        <div>
-                            <label class="flex items-start">
-                                <input type="checkbox" name="terms" required
-                                    class="mt-1 mr-3 rounded bg-transparent border-gray-700 text-white focus:ring-white">
-                                <span class="text-sm text-gray-400">
-                                    I agree to the <a href="/terms" class="text-white hover:underline">Terms of
-                                        Service</a> and
-                                    <a href="/privacy" class="text-white hover:underline"> Privacy Policy</a> *
-                                </span>
-                            </label>
-                        </div>
+                    
 
                         <button type="submit"
                             class="w-full py-3 px-6 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900">
@@ -155,7 +128,7 @@
                 <div class="text-center mt-6">
                     <p class="text-sm text-gray-400">
                         Already have an account?
-                        <a href="/login" class="text-white hover:underline ml-1">
+                        <a href="/register" class="text-white hover:underline ml-1">
                             Sign in here
                         </a>
                     </p>

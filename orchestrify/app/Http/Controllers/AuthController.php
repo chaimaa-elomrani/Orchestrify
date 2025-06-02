@@ -6,46 +6,53 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
-    protected $authService; 
+    protected $authService;
 
-    public function __construct(AuthService $authService){
+    public function __construct(AuthService $authService)
+    {
         $this->authService = $authService;
     }
 
-    public function index(){
+    public function index()
+    {
         return view('/home');
     }
 
-    public function showRegisterForm(){
+    public function showRegisterForm()
+    {
         return view('register');
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role' => 'required|in:musicien,chef',
         ]);
-        $user= $this->authService->register([
+        $user = $this->authService->register([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
             'role' => $validated['role'],
         ]);
 
-    
 
-        Auth::login($user); 
+
+        Auth::login($user);
         session()->flash('success', 'User registered successfully!');
-        return view('/home');
+        return view('/login');
     }
 
 
 
-        public function showLoginForm()
+
+
+    public function showLoginForm()
     {
         return view('login');
     }
@@ -58,24 +65,27 @@ class AuthController extends Controller {
             'password' => 'required|string',
         ]);
 
-        
+
         $user = $this->authService->login($credentials['email'], $credentials['password']);
 
-        if(!auth()->user()->profile_completed){
-            return redirect(route('profile.show'));
+        if (!$user) {
+            return redirect(route('login.form'))->with('error', 'Invalid credentials.');
         }
 
-        return redirect()->route('profile.index');
-    }   
+  
+
+        return view('/home');
+    }
 
 
-       public function logout()
+
+    public function logout()
     {
         $this->authService->logout();
-        
+
         Auth::logout();
         session()->flash('success', 'Logout successful!');
-        return redirect()->route('login');
+        return view('/home');
     }
 
 
