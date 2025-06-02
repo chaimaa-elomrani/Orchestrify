@@ -14,6 +14,9 @@ class AuthController extends Controller {
         $this->authService = $authService;
     }
 
+    public function index(){
+        return view('/home');
+    }
 
     public function showRegisterForm(){
         return view('register');
@@ -23,10 +26,9 @@ class AuthController extends Controller {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:musicien , chef',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:musicien,chef',
         ]);
-
         $user= $this->authService->register([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -34,9 +36,11 @@ class AuthController extends Controller {
             'role' => $validated['role'],
         ]);
 
+    
+
         Auth::login($user); 
         session()->flash('success', 'User registered successfully!');
-        return redirect()->route('login.form');
+        return view('/home');
     }
 
 

@@ -13,7 +13,6 @@ class AuthService {
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
         ]);
-
         return $user;
 
     }
