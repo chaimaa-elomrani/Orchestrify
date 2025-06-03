@@ -27,6 +27,6 @@ class MusicianProfile extends Model
     // Chaque musicien a un instrument principal
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class);
+        return $this->belongsTo(Instruments::class);
     }
 }
