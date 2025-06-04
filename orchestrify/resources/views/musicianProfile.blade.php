@@ -93,7 +93,8 @@
                 </div>
                 
                 <!-- Musician Profile Form -->
-                <form action="/api/complete-profile/musician" method="POST" class="space-y-6">
+                <form action="{{ route('musician.profile.store') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label for="instrument" class="block text-sm font-medium text-gray-300">
@@ -101,37 +102,14 @@
                             </label>
                             <select
                                 id="instrument"
-                                name="instrument"
+                                name="instrument_id"
                                 required
                                 class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
                             >
                                 <option value="">Select your primary instrument</option>
-                                <optgroup label="Cordes (Strings)">
-                                    <option value="Violon">Violin (Violon)</option>
-                                    <option value="Alto">Viola (Alto)</option>
-                                    <option value="Violoncelle">Cello (Violoncelle)</option>
-                                    <option value="Contrebasse">Double Bass (Contrebasse)</option>
-                                    <option value="Harpe">Harp (Harpe)</option>
-                                </optgroup>
-                                <optgroup label="Bois (Woodwinds)">
-                                    <option value="Flûte">Flute (Flûte)</option>
-                                    <option value="Hautbois">Oboe (Hautbois)</option>
-                                    <option value="Clarinette">Clarinet (Clarinette)</option>
-                                    <option value="Basson">Bassoon (Basson)</option>
-                                    <option value="Saxophone">Saxophone</option>
-                                </optgroup>
-                                <optgroup label="Cuivres (Brass)">
-                                    <option value="Cor">French Horn (Cor)</option>
-                                    <option value="Trompette">Trumpet (Trompette)</option>
-                                    <option value="Trombone">Trombone</option>
-                                    <option value="Tuba">Tuba</option>
-                                </optgroup>
-                                <optgroup label="Percussions & Autres">
-                                    <option value="Percussion">Percussion</option>
-                                    <option value="Piano">Piano</option>
-                                    <option value="Orgue">Organ (Orgue)</option>
-                                    <option value="Guitare">Guitar (Guitare)</option>
-                                </optgroup>
+                                @foreach ( $instruments as $instrument)
+                                <option value="{{ $instrument->id }}">{{ $instrument->nom }}</option>
+                                @endforeach
                             </select>
                         </div>
                         
@@ -141,7 +119,7 @@
                             </label>
                             <select
                                 id="niveau"
-                                name="niveau"
+                                name="level"
                                 required
                                 class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
                             >
@@ -173,7 +151,7 @@
                             </label>
                             <select
                                 id="disponibilite"
-                                name="disponibilite"
+                                name="disponibility"
                                 class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
                             >
                                 <option value="">Select your availability</option>
@@ -216,7 +194,7 @@
                         </label>
                         <textarea
                             id="biographie"
-                            name="biographie"
+                            name="bio"
                             rows="4"
                             placeholder="Tell us about your musical journey, favorite pieces to play, and what you love about performing..."
                             class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white resize-none"

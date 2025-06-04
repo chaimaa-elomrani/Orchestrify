@@ -10,12 +10,13 @@ class MusicianProfile extends Model
     use HasFactory;
 
     protected $fillable = [
+        'level', 
+        'experience',
+        'style',
+        'disponibility',
+        'bio',
         'user_id',
         'instrument_id',
-        'style',
-        'experience',
-        'brigade',
-        'biographie',
     ];
 
     public function user()

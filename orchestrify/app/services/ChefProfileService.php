@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
-class ChefProfileServices {
+class ChefProfileService {
 
     public function index(){
         return view('musicianProfile');
@@ -22,8 +22,6 @@ public function store(array $data){
          'bio' => 'required|string',
 
     ])->validate();
-
-
 
 
     ChefProfile::create([
