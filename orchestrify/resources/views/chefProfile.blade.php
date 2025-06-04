@@ -93,16 +93,27 @@
                 </div>
                 
                 <!-- Conductor Profile Form -->
-                <form action="/api/complete-profile/conductor" method="POST" class="space-y-6">
+                <form action="{{ route('chef.profile.store') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
+                            @if ($errors->any())
+    <div class="bg-red-500 text-white p-4 rounded mb-4">
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                             <label for="orchestre_nom" class="block text-sm font-medium text-gray-300">
                                 Orchestra Name *
                             </label>
                             <input
                                 type="text"
                                 id="orchestre_nom"
-                                name="orchestre_nom"
+                                name="orchestre_name"
                                 required
                                 placeholder="e.g., Paris Symphony Orchestra"
                                 class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
@@ -128,20 +139,13 @@
                             <label for="formation" class="block text-sm font-medium text-gray-300">
                                 Musical Formation/Education
                             </label>
-                            <select
+                          <input 
+                                type="text"
                                 id="formation"
                                 name="formation"
-                                class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
+                                placeholder="e.g., Conservatoire de Paris, Juilliard School"
+                                class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
                             >
-                                <option value="">Select your formation</option>
-                                <option value="Autodidacte">Self-taught (Autodidacte)</option>
-                                <option value="Cours privés">Private Lessons (Cours privés)</option>
-                                <option value="École de musique">Music School (École de musique)</option>
-                                <option value="Conservatoire">Conservatory (Conservatoire)</option>
-                                <option value="Université">University (Université)</option>
-                                <option value="Master">Master's Degree</option>
-                                <option value="Doctorat">Doctorate (Doctorat)</option>
-                            </select>
                         </div>
                         
                         <div class="space-y-2">
@@ -151,7 +155,7 @@
                             <input
                                 type="number"
                                 id="nombre_musiciens"
-                                name="nombre_musiciens"
+                                name="musicians_count"
                                 min="1"
                                 max="200"
                                 placeholder="e.g., 50"
@@ -167,9 +171,9 @@
                         <select
                             id="style"
                             name="style"
-                            class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white"
+                            class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
                         >
-                            <option value="">Select your preferred style</option>
+                            <option value="style">Select your preferred style</option>
                             <option value="Classique">Classical (Classique)</option>
                             <option value="Romantique">Romantic (Romantique)</option>
                             <option value="Baroque">Baroque</option>
@@ -189,7 +193,7 @@
                         </label>
                         <textarea
                             id="biographie"
-                            name="biographie"
+                            name="bio"
                             rows="4"
                             placeholder="Tell us about your musical journey, conducting philosophy, and notable achievements..."
                             class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white resize-none"
@@ -202,6 +206,12 @@
                     >
                         Complete Profile & Start Conducting
                     </button>
+                    @if (session('success'))
+    <div class="bg-green-500 text-white p-4 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
                 </form>
             </div>
         </div>

@@ -1,30 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\AuthService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\Request;
+use App\Services\ChefProfileServices;
 
 class ChefProfileController extends Controller
 {
-
-    // protected $authService;
-
-    // public function __construct($authService)
-    // {
-    //     $this->authService = $authService;
-    // }
+    protected $chefService; 
+     public function __construct(ChefProfileServices $chefService)
+   {
+      $this->chefService = $chefService; 
+   }
 
 
    public function index(){
       return view('chefProfile');
    }
 
-
-
-
-
-
-
+   
+    public function store(Request $request)
+    {
+        return $this->chefService->store($request->all());
+    }
 }
+
+

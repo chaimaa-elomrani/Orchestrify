@@ -18,13 +18,11 @@ class MusicianProfile extends Model
         'biographie',
     ];
 
-    // Chaque musicien est un utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Chaque musicien a un instrument principal
     public function instrument()
     {
         return $this->belongsTo(Instruments::class);

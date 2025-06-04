@@ -10,16 +10,16 @@ class ChefProfile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'orchestre_nom',
+        'orchestre_name',
         'experience',
         'formation',
-        'nombre_musiciens',
+        'musicians_count',
         'style',
-        'biographie',
+        'bio',
+        'user_id'
     ];
 
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

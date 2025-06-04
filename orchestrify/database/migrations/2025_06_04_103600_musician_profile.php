@@ -11,23 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conductor_profiles', function (Blueprint $table) {
+         Schema::create('musicien_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
-            $table->string('orchestre_nom');
+            $table->foreignId('instrument_id')->constrained('instruments')->onDelete('cascade');
+            $table->enum('niveau', ['débutant', 'intermédiaire', 'avancé']);
             $table->integer('experience')->nullable(); 
-            $table->string('formation')->nullable();
-            $table->integer('nombre_musiciens')->nullable();
-            $table->string('style')->nullable();
+            $table->string('style')->nullable();    
+            $table->string('disponibilite')->nullable(); 
             $table->text('biographie')->nullable();
 
             $table->timestamps();
         });
     }
-    
-    
-
     /**
      * Reverse the migrations.
      */
