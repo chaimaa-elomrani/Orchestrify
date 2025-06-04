@@ -27,6 +27,7 @@ class MusicianProfileService {
             'bio' => $validated['bio'],
             'user_id' => Auth::id(), 
             'instrument_id' => $validated['instrument_id'],
+            'completed' => true,
         ]);
  
             

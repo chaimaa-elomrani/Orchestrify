@@ -16,7 +16,8 @@ class ChefProfile extends Model
         'musicians_count',
         'style',
         'bio',
-        'user_id'
+        'user_id',
+        'completed',
     ];
 
 
