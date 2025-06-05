@@ -37,10 +37,8 @@ class ChefProfileService
             'user_id' => Auth::id(),
             'completed' => true,
         ]);
+ 
 
-        session()->flash('success', 'Chef profile created successfully!');
-
-        return redirect()->route('home');
     }
 
 }

@@ -59,7 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\IsAdmin::class, 
-        'check.profile.not.completed' => \App\Http\Middleware\RedirectIfProfileCompleted::class,
-
+        
     ];
 }

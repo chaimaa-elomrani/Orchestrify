@@ -73,9 +73,9 @@ class AuthController extends Controller
         }
 
         if($user->role === 'chef') {
-            return redirect(route('musician.profile'));
-        } elseif($user->role === 'musicien') {
             return redirect(route('chef.profile'));
+        } elseif($user->role === 'musicien') {
+            return redirect(route('musician.profile'));
         }
   
 

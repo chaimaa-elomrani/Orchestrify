@@ -26,7 +26,5 @@ Route::get('/musicianProfile', [MusicianProfileController::class, 'index'])->nam
 Route::post('/musicianProfile', [MusicianProfileController::class, 'store'])->name('musician.profile.store');
 
 
-Route::middleware(['auth', 'check.chef.profile'])->group(function () {
     Route::get('/chef/profile/create', [ChefProfileController::class, 'create'])->name('chef.profile.create');
     Route::post('/chef/profile/store', [ChefProfileController::class, 'store'])->name('chef.profile.store');
-});
