@@ -17,7 +17,7 @@ class MusicianProfile extends Model
         'bio',
         'user_id',
         'instrument_id',
-        'completed',
+        'completed',    
     ];
 
     public function user()

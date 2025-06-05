@@ -124,7 +124,7 @@
                             <select id="role" name="role" required
                                 class="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
                                 <option name="role">Select your role</option>
-                                <option value="chef">Conductor</option>
+                                <option value="chef">Chef</option>
                                 <option value="musicien">Musician</option>
 
                             </select>

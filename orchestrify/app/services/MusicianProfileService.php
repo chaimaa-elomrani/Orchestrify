@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\MusicianProfile;
 use App\Models\Instruments;
+use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -32,5 +33,11 @@ class MusicianProfileService {
  
             
     }
+
+
+
+
+
+    
     
 }

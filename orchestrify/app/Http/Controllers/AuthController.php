@@ -72,9 +72,13 @@ class AuthController extends Controller
             return redirect(route('login.form'))->with('error', 'Invalid credentials.');
         }
 
+        if($user->role === 'chef') {
+            return redirect(route('musician.profile'));
+        } elseif($user->role === 'musicien') {
+            return redirect(route('chef.profile'));
+        }
   
 
-        return view('/home');
     }
 
 
