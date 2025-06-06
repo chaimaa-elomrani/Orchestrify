@@ -172,7 +172,15 @@
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-400 hover:text-blue-300 mr-3">
+                                    <button 
+                                        class="text-blue-400 hover:text-blue-300 mr-3"
+                                        onclick="openEditModal(
+                                            '{{ addslashes($instrument->nom) }}',
+                                            '{{ addslashes($instrument->style) }}',
+                                            '{{ $instrument->volume }}',
+                                            '{{ addslashes($instrument->son) }}'
+                                        )"
+                                    >
                                         Edit
                                     </button>
                                     <button onclick="openDeleteModal('Sample Violin')"
@@ -284,8 +292,9 @@
                         <h3 class="text-lg font-playfair font-semibold text-white">Edit Instrument</h3>
                     </div>
 
-                    <form id="editInstrumentForm" class="space-y-4" method="post" action="">
+                    <form id="editInstrumentForm" class="space-y-4" method="post" action="{{ route('instruments.update', $instrument->id) }}">
                         @csrf
+                        @method('PUT')
                         <div>
                             <label for="editInstrumentName"
                                 class="block text-sm font-medium text-gray-300 mb-1">Instrument Name</label>
@@ -309,7 +318,7 @@
                                 <option value="blues">Blues</option>
                             </select>
                         </div>
-                        é
+                        
                         <div>
                             <label for="editInstrumentVolume"
                                 class="block text-sm font-medium text-gray-300 mb-1">Default Volume (0-100)</label>

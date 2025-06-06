@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Validator;
 
 
 
-class InstrumentService {
+class InstrumentService
+{
 
     public function get()
     {
@@ -14,7 +15,8 @@ class InstrumentService {
     }
 
 
-    public function store($data){
+    public function store($data)
+    {
         $validated = Validator::make($data, [
             'nom' => 'required|string|max:255',
             'son' => 'required|string|max:255',
@@ -33,14 +35,7 @@ class InstrumentService {
     public function update($id, $data)
     {
         $instrument = Instruments::findOrFail($id);
-        $validated = Validator::make($data, [
-            'nom' => 'required|string|max:255',
-            'son' => 'required|string|max:255',
-            'volume' => 'required|integer|min:1|max:100',
-            'style' => 'required|string|max:255',
-        ])->validate();
-        
-        $instrument->update($validated);
+        $instrument->update($data);
     }
 
 
