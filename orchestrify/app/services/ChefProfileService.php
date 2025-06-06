@@ -38,7 +38,6 @@ class ChefProfileService
             'completed' => true,
         ]);
  
-
     }
 
 }
