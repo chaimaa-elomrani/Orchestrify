@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Services\AuthService;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -58,6 +59,24 @@ class AuthController extends Controller
     }
 
 
+    public function checkProfileAndRedirect($user)
+    {
+        $hasMusicianProfile = DB::table('musician_profiles')->where('user_id', $user->id)->exists();
+        $hasChefProfile = DB::table('chef_profiles')->where('user_id', $user->id)->exists();
+
+        if ($hasMusicianProfile || $hasChefProfile) {
+            return redirect()->route('home');
+        } else {
+            if ($user->role === 'musicien') {
+                return redirect()->route('musician.profile')->with('message', 'Please complete your profile.');
+            } elseif ($user->role === 'chef') {
+                return redirect()->route('chef.profile')->with('message', 'Please complete your profile.');
+            } else {
+                return redirect()->route('home');
+            }
+        }
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -71,28 +90,12 @@ class AuthController extends Controller
             return redirect(route('login.form'))->with('error', 'Invalid credentials.');
         }
 
-        // Check if user is chef and needs to complete profile
-        if ($user->role === 'chef') {
-            if (!$user->chefProfile || !$user->chefProfile->completed) {
-                return redirect()->route('chef.profile');
-            }else{
-                return redirect()->route('home');
-            }
-        }
-
-        // Check if user is musicien and needs to complete profile
-        if ($user->role === 'musicien') {
-            if (!$user->musicianProfile || !$user->musicianProfile->completed) {
-                return redirect()->route('musician.profile');
-            }else{
-                return redirect()->route('home');
-            }
-        }
-
         Auth::login($user);
-        session()->flash('success', 'Login successful!');
-        return redirect()->route('home');
+
+        return $this->checkProfileAndRedirect($user);
     }
+
+
 
 
     public function logout()

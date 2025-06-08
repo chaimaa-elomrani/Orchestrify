@@ -171,48 +171,46 @@
                     </div>
 
                     <div class="space-y-4">
+                        @foreach ($musicians as $musician )
                         <div class="flex items-center mb-6">
                             <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center">
                                 <span class="text-white font-semibold text-xl" id="musicianInitials">AL</span>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-xl font-semibold text-white" id="musicianName">Alice Johnson</h4>
-                                <p class="text-gray-400" id="musicianEmail">alice.johnson@email.com</p>
+                                <h4 class="text-xl font-semibold text-white" id="musicianName">{{ $musician->user->name }}</h4>
+                                <p class="text-gray-400" id="musicianEmail">{{ $musician->user->email }}</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">Instrument</label>
-                                <p class="text-white" id="musicianInstrument">Flute</p>
+                                <p class="text-white" id="musicianInstrument">{{ $musician->instrument->nom }}</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">Level</label>
-                                <p class="text-white" id="musicianLevel">Expert</p>
+                                <p class="text-white" id="musicianLevel">{{ $musician->level}}</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">Experience</label>
-                                <p class="text-white" id="musicianExperience">15 years</p>
+                                <p class="text-white" id="musicianExperience">{{$musician->experience}}</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">Style</label>
-                                <p class="text-white" id="musicianStyle">Classical</p>
+                                <p class="text-white" id="musicianStyle">{{ $musician->style }}</p>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">Availability</label>
                                 <p class="text-white" id="musicianAvailability">Available</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Profile Status</label>
-                                <p class="text-white" id="musicianCompleted">Completed</p>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-1">Bio</label>
-                            <p class="text-gray-300 text-sm" id="musicianBio">Professional flutist with extensive
-                                classical training and orchestra experience.</p>
+                            <p class="text-gray-300 text-sm" id="musicianBio">{{ $musician->bio }}</p>
                         </div>
+
+                        @endforeach
                     </div>
                 </div>
 

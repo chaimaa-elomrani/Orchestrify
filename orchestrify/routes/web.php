@@ -45,3 +45,4 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
 });
 
 Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
+Route::get('/redirecting', [AuthController::class , 'checkProfileAndRedirect'])->name('redirecting');
