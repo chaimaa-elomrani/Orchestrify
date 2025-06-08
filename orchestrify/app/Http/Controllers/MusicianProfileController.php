@@ -24,6 +24,12 @@ class MusicianProfileController extends Controller
         return view('musicianProfile', compact('instruments'));
     }
 
+    // public function getAllProfiles()
+    // {
+    //     $profiles = $this->musicianService->getAllProfiles();
+    //     return view('musicianslist', compact('profiles'));
+    // }
+
 
     public function store(Request $request){
          $this->musicianService->store($request->all());
@@ -31,9 +37,13 @@ class MusicianProfileController extends Controller
     return redirect()->route('home');
     }
 
-    public function showForm(){
-        
+
+    public function getUsers(){
+       $musicians =  $this->musicianService->getUsers();
+       return view('musicianslist', compact('musicians'));
+
     }
+   
 
 
 

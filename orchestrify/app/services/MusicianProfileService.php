@@ -31,10 +31,24 @@ class MusicianProfileService {
             'completed' => true,
         ]);
  
-            
     }
 
 
+    public function getAllProfiles() {
+        return MusicianProfile::with('instrument')->get();
+    }
+
+
+    public function getUserById($id) {
+        return MusicianProfile::with('user_id')->find($id);
+    }
+
+    public function getUsers(){
+        $musicians = MusicianProfile::with(["user", "instrument"])->get();
+        return $musicians;	
+    }
+
+    
 
 
 

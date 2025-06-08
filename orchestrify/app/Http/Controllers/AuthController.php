@@ -65,22 +65,34 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-
         $user = $this->authService->login($credentials['email'], $credentials['password']);
 
         if (!$user) {
             return redirect(route('login.form'))->with('error', 'Invalid credentials.');
         }
 
-        if($user->role === 'chef') {
-            return redirect(route('chef.profile'));
-        } elseif($user->role === 'musicien') {
-            return redirect(route('musician.profile'));
+        // Check if user is chef and needs to complete profile
+        if ($user->role === 'chef') {
+            if (!$user->chefProfile || !$user->chefProfile->completed) {
+                return redirect()->route('chef.profile');
+            }else{
+                return redirect()->route('home');
+            }
         }
-  
 
+        // Check if user is musicien and needs to complete profile
+        if ($user->role === 'musicien') {
+            if (!$user->musicianProfile || !$user->musicianProfile->completed) {
+                return redirect()->route('musician.profile');
+            }else{
+                return redirect()->route('home');
+            }
+        }
+
+        Auth::login($user);
+        session()->flash('success', 'Login successful!');
+        return redirect()->route('home');
     }
-
 
 
     public function logout()

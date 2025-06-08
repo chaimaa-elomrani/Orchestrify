@@ -6,6 +6,7 @@ use App\Http\Controllers\ChefProfileController;
 use App\Http\Controllers\InstrumentsController;
 use App\Http\Controllers\MusicianFormController;
 use App\Http\Controllers\MusicianProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,8 +32,16 @@ Route::post('/chef/profile/store', [ChefProfileController::class, 'store'])->nam
 
 
 // instruments routes
+
 Route::get('/instruments', [InstrumentsController::class, 'index'])->name('instruments.index');
-Route::post('/instruments', [InstrumentsController::class, 'store'])->name('instruments.store');
-Route::get('/instruments/create', [InstrumentsController::class, 'showForm'])->name('instruments.create');
-Route::delete('/instruments/{id}', [InstrumentsController::class, 'destroy'])->name('instruments.destroy');
-Route::put('/instruments/update/{id}', [InstrumentsController::class, 'update'])->name('instruments.update');
+
+Route::middleware(['auth', 'role:chef'])->group(function () {
+    Route::post('/instruments', [InstrumentsController::class, 'store'])->name('instruments.store');
+    Route::get('/instruments/create', [InstrumentsController::class, 'showForm'])->name('instruments.create');
+    Route::delete('/instruments/{id}', [InstrumentsController::class, 'destroy'])->name('instruments.destroy');
+    Route::put('/instruments/update/{id}', [InstrumentsController::class, 'update'])->name('instruments.update');
+
+    // musicians list
+});
+
+Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
