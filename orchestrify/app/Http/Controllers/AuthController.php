@@ -50,9 +50,6 @@ class AuthController extends Controller
     }
 
 
-
-
-
     public function showLoginForm()
     {
         return view('login');
@@ -94,8 +91,6 @@ class AuthController extends Controller
 
         return $this->checkProfileAndRedirect($user);
     }
-
-
 
 
     public function logout()

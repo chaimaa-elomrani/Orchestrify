@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
-class MusicianProfileService {
+class MusicianProfileService
+{
 
-    
-    public function store (array $data){
+
+    public function store(array $data)
+    {
         $validated = Validator::make($data, [
             'level' => 'required|string|max:255',
             'experience' => 'required|integer|min:0|max:50',
@@ -26,32 +28,35 @@ class MusicianProfileService {
             'style' => $validated['style'],
             'disponibility' => $validated['disponibility'],
             'bio' => $validated['bio'],
-            'user_id' => Auth::id(), 
+            'user_id' => Auth::id(),
             'instrument_id' => $validated['instrument_id'],
             'completed' => true,
         ]);
- 
+
     }
 
 
-    public function getAllProfiles() {
+    public function getAllProfiles()
+    {
         return MusicianProfile::with('instrument')->get();
     }
 
 
-    public function getUserById($id) {
+    public function getUserById($id)
+    {
         return MusicianProfile::with('user_id')->find($id);
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $musicians = MusicianProfile::with(["user", "instrument"])->get();
-        return $musicians;	
+        return $musicians;
     }
 
-    
 
 
 
-    
-    
+
+
+
 }

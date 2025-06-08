@@ -4,11 +4,13 @@ use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthService {
+class AuthService
+{
 
-    public function register (array $data): User{
+    public function register(array $data): User
+    {
         $user = User::create([
-            'name' => $data['name'], 
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
@@ -18,27 +20,29 @@ class AuthService {
     }
 
 
-    public function login ($email , $password){
+    public function login($email, $password)
+    {
 
-        if(!Auth::attempt(['email' => $email, 'password' => $password])){
-            return false; 
+        if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+            return false;
         }
 
         $user = User::where('email', $email)->first();
-    
-        $user->save(); 
 
-        return $user ; 
+        $user->save();
+
+        return $user;
     }
 
 
-    public function logout(){
-       $user = Auth::user();
-        if(!$user){
-            return false ; 
+    public function logout()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return false;
         }
 
-        $user->tokens()->delete(); 
-        return true ; 
+        $user->tokens()->delete();
+        return true;
     }
 }

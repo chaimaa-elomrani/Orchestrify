@@ -94,7 +94,7 @@
                 <form action="{{ route('login') }}" method="POST" class="space-y-6">
                     @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   
+
 
                         <div class="space-y-2">
                             <label for="email" class="block text-sm font-medium text-gray-300">
@@ -111,11 +111,11 @@
                             <input type="password" id="password" name="password" required
                                 class="w-full bg-transparent border border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white focus:border-white text-white">
                         </div>
-                  
+
                     </div>
 
                     <div class="space-y-4">
-                    
+
 
                         <button type="submit"
                             class="w-full py-3 px-6 bg-white text-black font-medium rounded-md hover:bg-gray-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900">

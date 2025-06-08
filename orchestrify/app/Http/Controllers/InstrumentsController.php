@@ -39,7 +39,7 @@ class InstrumentsController extends Controller
 
    public function showForm()
    {
-            $instruments = $this->instrumentService->get();
+      $instruments = $this->instrumentService->get();
       return view('instruments', compact('instruments'));
    }
 

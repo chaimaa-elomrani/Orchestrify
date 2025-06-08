@@ -127,34 +127,30 @@
 
         <!-- Musicians Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            <!-- Musician Card 1 -->
-            <div class="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors duration-200">
-            <div class="flex items-center mb-1">
-                @foreach ( $musicians as $musician)
-                <div class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                <span class="text-white font-semibold">
-                    <img src="{{ asset('images/profile.png') }}" class="rounded-full" alt="">
-                </span>
+            @foreach ($musicians as $musician)
+                <!-- Musician Card -->
+                <div class="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition-colors duration-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
+                            <img src="{{ asset('images/profile.png') }}" class="rounded-full w-full h-full object-cover" alt="Profile">
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="text-lg font-semibold text-white">{{ $musician->user->name }}</h3>
+                            <p class="text-gray-400">{{ $musician->instrument->nom }}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="openMusicianModal({{ $musician->id }})"
+                            class="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
+                            View Profile
+                        </button>
+                        <button onclick="openAddModal('{{ $musician->user->name }}', {{ $musician->id }})"
+                            class="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors">
+                            Add
+                        </button>
+                    </div>
                 </div>
-                <div class="ml-4 flex-1">
-                <h3 class="text-lg font-semibold text-white">{{ $musician->user->name}}</h3>
-                <p class="text-gray-400">{{ $musician->instrument->nom }}</p>
-                </div>
-                <div class="flex space-x-2">
-                <button onclick="openMusicianModal()"
-                    class="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
-                    View Profile
-                </button>
-                <button onclick="openAddModal()"
-                    class="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors">
-                    Add
-                </button>
-                </div>
-                      
-                @endforeach
-            </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
 
@@ -163,54 +159,14 @@
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-black bg-opacity-75 modal-backdrop transition-opacity"></div>
 
-            <div
-                class="inline-block align-bottom bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+            <div class="inline-block align-bottom bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
                 <div class="bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="mb-4">
                         <h3 class="text-lg font-playfair font-semibold text-white">Musician Profile</h3>
                     </div>
 
-                    <div class="space-y-4">
-                        @foreach ($musicians as $musician )
-                        <div class="flex items-center mb-6">
-                            <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center">
-                                <span class="text-white font-semibold text-xl" id="musicianInitials">AL</span>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-xl font-semibold text-white" id="musicianName">{{ $musician->user->name }}</h4>
-                                <p class="text-gray-400" id="musicianEmail">{{ $musician->user->email }}</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Instrument</label>
-                                <p class="text-white" id="musicianInstrument">{{ $musician->instrument->nom }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Level</label>
-                                <p class="text-white" id="musicianLevel">{{ $musician->level}}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Experience</label>
-                                <p class="text-white" id="musicianExperience">{{$musician->experience}}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Style</label>
-                                <p class="text-white" id="musicianStyle">{{ $musician->style }}</p>
-                            </div>
-                            <!-- <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1">Availability</label>
-                                <p class="text-white" id="musicianAvailability">Available</p>
-                            </div> -->
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1">Bio</label>
-                            <p class="text-gray-300 text-sm" id="musicianBio">{{ $musician->bio }}</p>
-                        </div>
-
-                        @endforeach
+                    <div class="space-y-4" id="modalContent">
+                        <!-- Content will be populated by JavaScript -->
                     </div>
                 </div>
 
@@ -233,8 +189,7 @@
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-black bg-opacity-75 modal-backdrop transition-opacity"></div>
 
-            <div
-                class="inline-block align-bottom bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="inline-block align-bottom bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:text-left">
@@ -262,11 +217,54 @@
     </div>
 
     <script>
+        // Store musicians data for JavaScript access
+        const musiciansData = @json($musicians);
+        let currentMusicianId = null;
 
+        // Open Musician Profile Modal with specific musician data
+        function openMusicianModal(musicianId) {
+            currentMusicianId = musicianId;
+            const musician = musiciansData.find(m => m.id === musicianId);
+            
+            if (musician) {
+                const modalContent = document.getElementById('modalContent');
+                modalContent.innerHTML = `
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center">
+                            <img src="{{ asset('images/profile.png') }}" class="rounded-full w-full h-full object-cover" alt="Profile">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-xl font-semibold text-white">${musician.user.name}</h4>
+                            <p class="text-gray-400">${musician.user.email}</p>
+                        </div>
+                    </div>
 
-        // Open Musician Profile Modal
-        function openMusicianModal() {
-            document.getElementById('musicianModal').classList.remove('hidden');
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Instrument</label>
+                            <p class="text-white">${musician.instrument.nom}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Level</label>
+                            <p class="text-white">${musician.level || 'Not specified'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Experience</label>
+                            <p class="text-white">${musician.experience || 'Not specified'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Style</label>
+                            <p class="text-white">${musician.style || 'Not specified'}</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Bio</label>
+                        <p class="text-gray-300 text-sm">${musician.bio || 'Not specified'}</p>
+                    </div>
+                `;
+                document.getElementById('musicianModal').classList.remove('hidden');
+            }
         }
 
         // Open Add to Orchestra Modal

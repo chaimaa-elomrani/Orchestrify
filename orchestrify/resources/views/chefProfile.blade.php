@@ -61,7 +61,7 @@
             </div>
         </div>
     </nav>
-  
+
 
     <!-- Complete Profile Section -->
     <div class="flex-grow flex items-center justify-center register-bg py-12">

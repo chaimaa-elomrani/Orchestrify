@@ -172,15 +172,12 @@
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button 
-                                        class="text-blue-400 hover:text-blue-300 mr-3"
-                                        onclick="openEditModal(
-                                            '{{ addslashes($instrument->nom) }}',
-                                            '{{ addslashes($instrument->style) }}',
-                                            '{{ $instrument->volume }}',
-                                            '{{ addslashes($instrument->son) }}'
-                                        )"
-                                    >
+                                    <button class="text-blue-400 hover:text-blue-300 mr-3" onclick="openEditModal(
+                                                '{{ addslashes($instrument->nom) }}',
+                                                '{{ addslashes($instrument->style) }}',
+                                                '{{ $instrument->volume }}',
+                                                '{{ addslashes($instrument->son) }}'
+                                            )">
                                         Edit
                                     </button>
                                     <button onclick="openDeleteModal('Sample Violin')"
@@ -292,7 +289,8 @@
                         <h3 class="text-lg font-playfair font-semibold text-white">Edit Instrument</h3>
                     </div>
 
-                    <form id="editInstrumentForm" class="space-y-4" method="post" action="{{ route('instruments.update', $instrument->id) }}">
+                    <form id="editInstrumentForm" class="space-y-4" method="post"
+                        action="{{ route('instruments.update', $instrument->id) }}">
                         @csrf
                         @method('PUT')
                         <div>
@@ -318,7 +316,7 @@
                                 <option value="blues">Blues</option>
                             </select>
                         </div>
-                        
+
                         <div>
                             <label for="editInstrumentVolume"
                                 class="block text-sm font-medium text-gray-300 mb-1">Default Volume (0-100)</label>
@@ -374,14 +372,15 @@
                 </div>
                 <div class="bg-gray-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button>
-                    <form id="deleteInstrumentForm" method="POST" action="{{ route('instruments.destroy', $instrument->id) }}" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Delete
-                        </button>
-                    </form>
+                        <form id="deleteInstrumentForm" method="POST"
+                            action="{{ route('instruments.destroy', $instrument->id) }}" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                Delete
+                            </button>
+                        </form>
                     </button>
                     <button type="button" onclick="closeDeleteModal()"
                         class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -470,7 +469,7 @@
 
             document.getElementById('emptyState').classList.toggle('hidden', hasVisibleRows);
         });
-        
+
     </script>
 </body>
 

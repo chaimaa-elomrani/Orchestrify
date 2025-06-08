@@ -8,11 +8,11 @@ class Instruments extends Model
 {
     protected $fillable = [
         'nom',
-        'style', 
+        'style',
         'volume',
         'son'
     ];
-    
+
     protected $table = 'instruments';
 }
 

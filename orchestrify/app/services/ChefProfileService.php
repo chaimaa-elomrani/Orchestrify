@@ -37,7 +37,7 @@ class ChefProfileService
             'user_id' => Auth::id(),
             'completed' => true,
         ]);
- 
+
     }
 
 }
