@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Musicians_programs extends Model
+class MusiciansPrograms extends Model
 {
     
-    protected $fillable = ['musician_id', 'programme_id', 'ordre', 'duree'];
+    protected $fillable = ['musician_id', 'program_id', 'ordre', 'duree'];
 
 
     public function musician()
@@ -16,6 +16,6 @@ class Musicians_programs extends Model
     }
     public function program()
     {
-        return $this->belongsTo(Program::class, 'programme_id');
+        return $this->belongsTo(Programs::class, 'program_id');
     }
 }

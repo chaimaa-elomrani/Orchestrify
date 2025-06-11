@@ -6,6 +6,7 @@ use App\Http\Controllers\ChefProfileController;
 use App\Http\Controllers\InstrumentsController;
 use App\Http\Controllers\MusicianFormController;
 use App\Http\Controllers\MusicianProfileController;
+use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,5 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
 
 Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
 Route::get('/redirecting', [AuthController::class , 'checkProfileAndRedirect'])->name('redirecting');
+Route::get('/programs', [ProgramsController::class , 'index'])->name('programs.index');
+Route::post('/programs', [ProgramsController::class, 'store'])->name('programs.store');

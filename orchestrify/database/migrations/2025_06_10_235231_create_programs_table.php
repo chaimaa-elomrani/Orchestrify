@@ -10,11 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('programmes', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('style');
             $table->integer('tempo');
+            $table->integer('duration');
             $table->enum('mode', ['concert', 'repetition']);
             $table->timestamps();
         });
