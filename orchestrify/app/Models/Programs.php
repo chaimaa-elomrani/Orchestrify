@@ -18,7 +18,7 @@ class Programs extends Model
 
     public function musicians()
     {
-        return $this->belongsToMany(MusicianProfile::class, 'musician_programme', 'programme_id', 'musician_profiles_id', 'id', 'id')
+        return $this->belongsToMany(MusicianProfile::class, 'musician_programme', 'programme_id', 'musician_profiles_id')
             ->withPivot('ordre', 'duree');
     }
     

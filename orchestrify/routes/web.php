@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChefDashboardController;
 use App\Http\Controllers\ChefFormController;
 use App\Http\Controllers\ChefProfileController;
 use App\Http\Controllers\InstrumentsController;
@@ -51,3 +52,4 @@ Route::get('/programs', [ProgramsController::class , 'index'])->name('programs.i
 Route::post('/programs', [ProgramsController::class, 'store'])->name('programs.store');
 
 Route::get('musicians', [MusicianProfileController::class, 'getMusicians'])->name('musicians.index');
+Route::get('/chefDashboard', [ChefDashboardController::class, 'stats'])->name('chefDashboard');

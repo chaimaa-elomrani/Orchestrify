@@ -97,7 +97,7 @@
             <!-- Dashboard Content -->
             <div class="px-4 py-6 sm:px-0">
                 <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <div class="bg-white overflow-hidden shadow rounded-lg">
                         <div class="px-4 py-5 sm:p-6">
                             <div class="flex items-center">
@@ -110,7 +110,8 @@
                                     <dl>
                                         <dt class="text-sm font-medium text-gray-500 truncate">Total Programs</dt>
                                         <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">12</div>
+                                    
+                                            <div class="text-2xl font-semibold text-gray-900">{{$totalPrograms}}</div>
                                         </dd>
                                     </dl>
                                 </div>
@@ -128,9 +129,9 @@
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Active Musicians</dt>
+                                        <dt class="text-sm font-medium text-gray-500 truncate">Total Musicians</dt>
                                         <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">24</div>
+                                            <div class="text-2xl font-semibold text-gray-900">{{ $totalMusicians }}</div>
                                         </dd>
                                     </dl>
                                 </div>
@@ -158,25 +159,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white overflow-hidden shadow rounded-lg">
-                        <div class="px-4 py-5 sm:p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 bg-conductor-100 rounded-md p-3">
-                                    <svg class="h-6 w-6 text-conductor-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-5 w-0 flex-1">
-                                    <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Performances</dt>
-                                        <dd class="flex items-baseline">
-                                            <div class="text-2xl font-semibold text-gray-900">8</div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
 
             
@@ -214,24 +197,27 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
+                                        @foreach ( $programs as $program )
+                                 
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium text-gray-900">Beethoven's 5th</div>
+                                                <div class="text-sm font-medium text-gray-900">{{ $program->name }}</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">Classical</div>
+                                                <div class="text-sm text-gray-500">{{ $program->style }}</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">45 min</div>
+                                                <div class="text-sm text-gray-500">{{ $program->duration }} min</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-500">18</div>
+                                                <div class="text-sm text-gray-500">{{ $program->count() }}</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="#" class="text-conductor-600 hover:text-conductor-900">Edit</a>
                                             </td>
                                         </tr>
-                                   
+                                          
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -260,16 +246,16 @@
                                             </div>
                                             <div class="mt-2 flex justify-between">
                                                 <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         JD
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         ML
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         AB
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         +5
                                                     </div>
                                                 </div>
@@ -289,13 +275,13 @@
                                             </div>
                                             <div class="mt-2 flex justify-between">
                                                 <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         PL
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         SR
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         +4
                                                     </div>
                                                 </div>
@@ -341,13 +327,13 @@
                                             </div>
                                             <div class="mt-2 flex justify-between">
                                                 <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         RD
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         MK
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs font-medium">
+                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
                                                         LT
                                                     </div>
                                                 </div>

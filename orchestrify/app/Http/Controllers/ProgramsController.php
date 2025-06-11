@@ -26,16 +26,13 @@ class ProgramsController extends Controller
 
     public function index()
     {
-        // Get musician profiles with their instrument relationship
-        $musicians = MusicianProfile::with('instrument', 'user')->get(); // Load instrument relationship
+        $musicians = MusicianProfile::with('instrument', 'user')->get(); 
         $instruments = $this->instrumentsService->get();
-        // dd($musicians);
-        // Debug to see the structure
-        // dd($musicians->toArray());
-        
         return view('program', compact('musicians', 'instruments'));
     }
 
+
+ 
 
     
     public function store(Request $request)
