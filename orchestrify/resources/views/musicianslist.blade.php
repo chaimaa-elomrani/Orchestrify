@@ -144,10 +144,6 @@
                             class="px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
                             View Profile
                         </button>
-                        <button onclick="openAddModal('{{ $musician->user->name }}', {{ $musician->id }})"
-                            class="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors">
-                            Add
-                        </button>
                     </div>
                 </div>
             @endforeach
@@ -171,45 +167,9 @@
                 </div>
 
                 <div class="bg-gray-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="addToOrchestraFromModal()"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Add to Orchestra
-                    </button>
                     <button type="button" onclick="closeMusicianModal()"
-                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        class="w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:w-auto sm:text-sm">
                         Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add to Orchestra Confirmation Modal -->
-    <div id="addModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-black bg-opacity-75 modal-backdrop transition-opacity"></div>
-
-            <div class="inline-block align-bottom bg-gray-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-white">Add to Orchestra</h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-400">
-                                    Are you sure you want to add "<span id="addMusicianName"></span>" to your orchestra?
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="confirmAdd()"
-                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Add Member
-                    </button>
-                    <button type="button" onclick="closeAddModal()"
-                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-700 text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Cancel
                     </button>
                 </div>
             </div>
@@ -267,35 +227,21 @@
             }
         }
 
-        // Open Add to Orchestra Modal
-        function openAddModal() {
-            document.getElementById('addModal').classList.remove('hidden');
-        }
-
         // Close Musician Profile Modal
         function closeMusicianModal() {
             document.getElementById('musicianModal').classList.add('hidden');
-        }
-
-        // Close Add to Orchestra Modal
-        function closeAddModal() {
-            document.getElementById('addModal').classList.add('hidden');
         }
 
         // Close modals with Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeMusicianModal();
-                closeAddModal();
             }
         });
 
         // Close modals when clicking on backdrop
         document.getElementById('musicianModal').addEventListener('click', function (e) {
             if (e.target === this) closeMusicianModal();
-        });
-        document.getElementById('addModal').addEventListener('click', function (e) {
-            if (e.target === this) closeAddModal();
         });
 
     </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MusicianProfile;
 use App\Services\InstrumentService;
 use App\Services\MusicianProfileService;
 use Illuminate\Http\Request;
@@ -38,13 +39,13 @@ class MusicianProfileController extends Controller
         return redirect()->route('home');
     }
 
-
+    
     public function getUsers()
     {
         $musicians = $this->musicianService->getUsers();
         return view('musicianslist', compact('musicians'));
-
     }
+
 
 
 

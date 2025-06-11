@@ -174,25 +174,17 @@
                                     class="w-full px-3 py-2 input-dark rounded-lg focus:ring-2 focus:ring-indigo-500 transition-all duration-300"
                                     required>
                                     <option value="">Sélectionner...</option>
-                                    @if(isset($musicianProfiles))
-                                        @foreach($musicianProfiles as $profile)
-                                            <option value="{{ $profile->id }}">{{ $profile->name }} -
-                                                {{ $profile->instrument ?? 'Instrument non spécifié' }}</option>
-                                        @endforeach
-                                    @else
-                                        <!-- Fallback static options - but these IDs might not exist -->
-                                        <option value="1">Jean Dupont - Violon</option>
-                                        <option value="2">Marie Martin - Piano</option>
-                                        <option value="3">Pierre Durand - Guitare</option>
-                                        <option value="4">Sophie Leroy - Flûte</option>
-                                        <option value="5">Antoine Bernard - Batterie</option>
-                                        <option value="6">Camille Rousseau - Violoncelle</option>
-                                        <option value="7">Lucas Moreau - Trompette</option>
-                                        <option value="8">Emma Dubois - Harpe</option>
-                                    @endif
+                                    @foreach($musicians as $musician)
+                                        <option value="{{ $musician->id }}">
+                                            {{ $musician->user->name ?? 'Nom non disponible' }} -
+                                            {{ $musician->instrument->nom ?? 'Instrument non spécifié' }}
+
+
+                                        </option>
+                                    @endforeach
+
                                 </select>
                             </div>
-
                             <!-- Ordre -->
                             <div>
                                 <label class="block text-sm font-semibold text-gray-300 mb-2">
@@ -232,7 +224,7 @@
                 </div>
             </div>
 
-          
+
 
             <!-- Boutons d'Action -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -279,11 +271,12 @@
                                 class="w-full px-3 py-2 input-dark rounded-lg focus:ring-2 focus:ring-indigo-500 transition-all duration-300"
                                 required>
                             <option value="">Sélectionner...</option>
-                            @if(isset($musicianProfiles))
-                                @foreach($musicianProfiles as $profile)
-                                    <option value="{{ $profile->id }}">{{ $profile->name }} - {{ $profile->instrument ?? 'Instrument non spécifié' }}</option>
-                                @endforeach
-                            @endif
+                        @foreach($musicians as $musician)
+                            <option value="{{ $musician->id }}">
+                                {{ $musician->user->name ?? 'Nom non disponible' }} -
+                                {{ $musician->instrument->nom ?? 'Instrument non spécifié' }}
+                            </option>
+                        @endforeach
                         </select>
                     </div>
                     

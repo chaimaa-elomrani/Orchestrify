@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\MusicianProfile;
 use App\Models\Instruments;
+use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -51,6 +52,14 @@ class MusicianProfileService
     {
         $musicians = MusicianProfile::with(["user", "instrument"])->get();
         return $musicians;
+    }
+
+
+       public function getMusicians()
+    {
+        $users = User::where('role', 'musicien')->get();
+        return $users;
+
     }
 
 

@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('chef_profiles', function (Blueprint $table) {
-            $table->boolean('completed')->default(false);
-        });
+        //
     }
 
     /**
@@ -21,8 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('chef_profile', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

@@ -11,7 +11,8 @@ class InstrumentService
 
     public function get()
     {
-        return Instruments::all();
+        $instruments = Instruments::all();
+        return $instruments;
     }
 
 

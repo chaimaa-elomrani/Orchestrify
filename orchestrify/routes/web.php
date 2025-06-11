@@ -49,3 +49,5 @@ Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])-
 Route::get('/redirecting', [AuthController::class , 'checkProfileAndRedirect'])->name('redirecting');
 Route::get('/programs', [ProgramsController::class , 'index'])->name('programs.index');
 Route::post('/programs', [ProgramsController::class, 'store'])->name('programs.store');
+
+Route::get('musicians', [MusicianProfileController::class, 'getMusicians'])->name('musicians.index');

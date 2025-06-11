@@ -27,6 +27,16 @@ class MusicianProfile extends Model
 
     public function instrument()
     {
-        return $this->belongsTo(Instruments::class);
+        return $this->belongsTo(Instruments::class , 'instrument_id');
+    }
+
+    public function getInstrumentNameAttribute()
+    {
+        return $this->instrument ? ($this->instrument->nom ?? $this->instrument->name) : 'Instrument non spécifié';
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        return ($this->name ?? $this->nom) . ' - ' . $this->instrument_name;
     }
 }
