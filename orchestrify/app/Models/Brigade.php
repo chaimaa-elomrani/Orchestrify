@@ -32,5 +32,6 @@ class Brigade extends Model
         return $this->belongsTo(Instruments::class, 'instruments');
     }
 
+    
    
 }

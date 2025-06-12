@@ -236,121 +236,57 @@
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                                 <div>
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Musician Brigades</h3>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">My Brigades</h3>
                                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Organized musical groups</p>
                                 </div>
                                 <a href="#" class="text-conductor-600 hover:text-conductor-800 text-sm font-medium">Manage</a>
                             </div>
                             <div class="border-t border-gray-200">
+                                @foreach ( $brigades as $brigade )
+                             
                                 <ul role="list" class="divide-y divide-gray-200">
                                     <li>
                                         <div class="px-4 py-4 sm:px-6">
                                             <div class="flex items-center justify-between">
-                                                <p class="text-sm font-medium text-conductor-600 truncate">Strings</p>
+                                                <p class="text-sm font-medium text-conductor-600 truncate">{{ $brigade->name }}</p>
                                                 <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    8 musicians
+                                                    {{ $brigade->musicians->count() }} musicians
                                                 </p>
                                             </div>
                                             <div class="mt-2 flex justify-between">
-                                                <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        JD
+                                                @if($brigade->musicians->count() == 1)
+                                                    <div class="flex -space-x-2 overflow-hidden">
+                                                        <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 items-center justify-center text-xs font-medium">
+                                                            <img src="{{ asset('images/profile.png') }}" class="rounded-full" alt="">
+                                                        </div>
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        ML
+                                                @elseif($brigade->musicians->count() == 2)
+                                                    <div class="flex -space-x-2 overflow-hidden">
+                                                        @for($i = 0; $i < 2; $i++)
+                                                            <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 items-center justify-center text-xs font-medium">
+                                                                <img src="{{ asset('images/profile.png') }}" class="rounded-full" alt="">
+                                                            </div>
+                                                        @endfor
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        AB
+                                                @elseif($brigade->musicians->count() >= 3)
+                                                    <div class="flex -space-x-2 overflow-hidden">
+                                                        @for($i = 0; $i < 3; $i++)
+                                                            <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300 items-center justify-center text-xs font-medium">
+                                                                <img src="{{ asset('images/profile.png') }}" class="rounded-full" alt="">
+                                                            </div>
+                                                        @endfor
                                                     </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        +5
-                                                    </div>
-                                                </div>
+                                                @endif
                                                 <div class="text-sm text-gray-500">
                                                     <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="px-4 py-4 sm:px-6">
-                                            <div class="flex items-center justify-between">
-                                                <p class="text-sm font-medium text-conductor-600 truncate">Woodwinds</p>
-                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    6 musicians
-                                                </p>
-                                            </div>
-                                            <div class="mt-2 flex justify-between">
-                                                <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        PL
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        SR
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        +4
-                                                    </div>
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                    <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="px-4 py-4 sm:px-6">
-                                            <div class="flex items-center justify-between">
-                                                <p class="text-sm font-medium text-conductor-600 truncate">Brass</p>
-                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    5 musicians
-                                                </p>
-                                            </div>
-                                            <div class="mt-2 flex justify-between">
-                                                <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        TM
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        JB
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        +3
-                                                    </div>
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                    <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="px-4 py-4 sm:px-6">
-                                            <div class="flex items-center justify-between">
-                                                <p class="text-sm font-medium text-conductor-600 truncate">Percussion</p>
-                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    3 musicians
-                                                </p>
-                                            </div>
-                                            <div class="mt-2 flex justify-between">
-                                                <div class="flex -space-x-2 overflow-hidden">
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        RD
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        MK
-                                                    </div>
-                                                    <div class="inline-block h-6 w-6 rounded-full ring-2 ring-white bg-gray-300  items-center justify-center text-xs font-medium">
-                                                        LT
-                                                    </div>
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                    <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                   
                                 </ul>
+                                   
+                                @endforeach
                             </div>
                         </div>
                     </div>

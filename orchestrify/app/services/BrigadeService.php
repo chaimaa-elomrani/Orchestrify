@@ -36,7 +36,7 @@ class BrigadeService{
 
     public function  getAllBrigades()
     {
-        return Brigade::with(['chefProfile', 'musicianProfile'])->get();
+        return Brigade::with(['chefProfile', 'musicians'])->get();
     }
 
 
