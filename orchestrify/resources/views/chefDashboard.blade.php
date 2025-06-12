@@ -285,7 +285,11 @@
                                                         @endfor
                                                     </div>
                                                 @endif
+<<<<<<< HEAD
                                                   <div class="text-sm text-gray-500 flex gap-2">
+=======
+                                                <div class="text-sm text-gray-500 flex gap-2">
+>>>>>>> d9f8fc87656d8aec438d2d945a24f7a7c69f6e12
                                                     <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
                                                     <form action="{{ route('brigades.destroy', $brigade->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this brigade?');">
                                                         @csrf
