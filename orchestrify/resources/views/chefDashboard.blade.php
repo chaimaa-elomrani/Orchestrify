@@ -91,12 +91,20 @@
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <h2 class="font-playfair text-2xl font-bold text-gray-900">Conductor Dashboard</h2>
-                <a  href="/programs" class="bg-conductor-600 hover:bg-conductor-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                <div class="flex space-x-4">
+                <a  href="/programs" class="bg-conductor-600 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                     </svg>
                     New Program
                 </a>
+                <a  href="/brigades" class="bg-conductor-600 bg-gray-900 hover:bg-conductor-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    New Brigade
+                </a>
+                </div>
             </div>
         </header>
 
@@ -169,10 +177,8 @@
                   
                 </div>
 
-            
-
                 <!-- Two Column Layout -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
                     <!-- Recent Programs -->
                     <div class="lg:col-span-2">
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -277,8 +283,13 @@
                                                         @endfor
                                                     </div>
                                                 @endif
-                                                <div class="text-sm text-gray-500">
+                                                <div class="text-sm text-gray-500 flex gap-2">
                                                     <a href="#" class="text-conductor-600 hover:text-conductor-900">View</a>
+                                                    <form action="{{ route('brigades.destroy', $brigade->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this brigade?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-600 hover:text-red-800 ml-2">Delete</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

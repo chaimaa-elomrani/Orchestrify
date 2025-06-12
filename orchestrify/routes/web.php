@@ -49,15 +49,6 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
 
     Route::get('musicians', [MusicianProfileController::class, 'getMusicians'])->name('musicians.index');
 
-    // Brigade routes
-    // Route::get('/brigades', [brigadeController::class, 'index'])->name('brigades.index');
-    // Route::post('/brigades', [brigadeController::class, 'store'])->name('brigades.store');
-    // Route::get('/brigades/{id}', [brigadeController::class, 'show'])->name('brigades.show');
-    // Route::get('/brigades/{id}/edit', [brigadeController::class, 'edit'])->name('brigades.edit');
-    // Route::put('/brigades/{id}', [brigadeController::class, 'update'])->name('brigades.update');
-    // Route::get('/brigades/{id}/choose-musicians', [brigadeController::class, 'chooseMusicians'])->name('brigades.choose-musicians');
-    // Route::post('/brigades/{id}/assign-musicians', [brigadeController::class, 'assignMusicians'])->name('brigades.assign-musicians');
-    // Route::delete('/brigades/{brigadeId}/musicians/{musicianId}', [brigadeController::class, 'removeMusician'])->name('brigades.remove-musician');
 });
 
 Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
@@ -70,12 +61,13 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
     Route::get('/chef/musicians', [MusicianProfileController::class, 'getMusicians'])->name('chef.musicians');
     Route::get('/chef/instruments', [InstrumentsController::class, 'index'])->name('chef.instruments');
     Route::get('/chef/history', function () {
-        return view('chef.history'); })->name('chef.history');
+        return view('chef.history');
+    })->name('chef.history');
 });
 
 Route::get('brigades', [brigadeController::class, 'index'])->name('brigades.index');
 Route::post('brigades', [brigadeController::class, 'store'])->name('brigades.store');
-Route::delete('brigades/{id}', [brigadeController::class, 'delete'])->name('brigades.delete');
+Route::delete('brigades/{id}', [brigadeController::class, 'delete'])->name('brigades.destroy');
 Route::put('brigades/{id}', [brigadeController::class, 'update'])->name('brigades.update');
 // Route::get('brigade/details', [brigadeController::class, 'details'])->name('brigades.details');
 Route::get('brigades/{id}', [brigadeController::class, 'details'])->name('brigades.details');
