@@ -34,18 +34,19 @@ class ProgramsService{
      * @return Programs The created program instance
      * @throws \Exception When an error occurs during transaction
      */
-     public function store(array $data)
+    public function store(array $data)
     {
         DB::beginTransaction();
-        
+               
         try {
-            // Create the program
+            // Create the program WITH chef_id included
             $program = Programs::create([
                 'name' => $data['name'],
                 'style' => $data['style'],
                 'tempo' => $data['tempo'],
                 'duration' => $data['duration'],
                 'mode' => $data['mode'] ?? 'Concert',
+                'chef_id' => auth()->id(), // Add chef_id here during creation
             ]);
 
             // If musicians data is provided, attach them to the program
@@ -60,13 +61,11 @@ class ProgramsService{
 
             DB::commit();
             return $program;
-
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
     }
-
 
 
     

@@ -39,7 +39,7 @@ class ProgramsController extends Controller
     {
         $this->programsService->store($request->all());
         session()->flash('success', 'Program created successfully!');
-        return redirect()->route('programs.index');
+        return redirect()->route('chef.dashboard');
     }
 
 

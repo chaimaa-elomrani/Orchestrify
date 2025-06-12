@@ -42,14 +42,25 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
     Route::get('/instruments/create', [InstrumentsController::class, 'showForm'])->name('instruments.create');
     Route::delete('/instruments/{id}', [InstrumentsController::class, 'destroy'])->name('instruments.destroy');
     Route::put('/instruments/update/{id}', [InstrumentsController::class, 'update'])->name('instruments.update');
+    Route::get('/chefDashboard', [ChefDashboardController::class, 'stats'])->name('chefDashboard');
+    Route::get('/programs', [ProgramsController::class , 'index'])->name('programs.index');
+    Route::post('/programs', [ProgramsController::class, 'store'])->name('programs.store');
 
-    // musicians list
+    Route::get('musicians', action: [MusicianProfileController::class, 'getMusicians'])->name(name: 'musicians.index');
+  
 });
 
 Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
 Route::get('/redirecting', [AuthController::class , 'checkProfileAndRedirect'])->name('redirecting');
-Route::get('/programs', [ProgramsController::class , 'index'])->name('programs.index');
-Route::post('/programs', [ProgramsController::class, 'store'])->name('programs.store');
 
-Route::get('musicians', [MusicianProfileController::class, 'getMusicians'])->name('musicians.index');
-Route::get('/chefDashboard', [ChefDashboardController::class, 'stats'])->name('chefDashboard');
+// Add these routes if they don't exist
+Route::middleware(['auth', 'role:chef'])->group(function () {
+    Route::get('/chef/dashboard', [ChefDashboardController::class, 'stats'])->name('chef.dashboard');
+    Route::get('/chef/programs', [ProgramsController::class, 'index'])->name('chef.programs');
+    Route::get('/chef/musicians', [MusicianProfileController::class, 'getMusicians'])->name('chef.musicians');
+    Route::get('/chef/instruments', [InstrumentsController::class, 'index'])->name('chef.instruments');
+    Route::get('/chef/history', function() { return view('chef.history'); })->name('chef.history');
+    
+    // Add musician dashboard route
+    Route::get('/musician/dashboard', function() { return view('musicianDashboard'); })->name('musician.dashboard');
+});

@@ -40,17 +40,25 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // Check if user is chef
+    public function isChef()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->role === 'chef';
     }
 
-
-    public function chefProfile()
+    // Check if user is musician
+    public function isMusician()
     {
-        return $this->hasOne(ChefProfile::class);
+        return $this->role === 'musician';
+    }
+
+    // Relationship with musician profile
+    public function musicianProfile()
+    {
+        return $this->hasOne(MusicianProfile::class);
     }
 }

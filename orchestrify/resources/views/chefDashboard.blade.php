@@ -34,7 +34,8 @@
     </script>
 </head>
 <body class="bg-gray-100 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
-    <!-- Navigation -->
+    <!-- Only show chef navigation if user is chef -->
+    @if(auth()->user()->isChef())
     <nav class="bg-gray-900 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -47,11 +48,11 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">History</a>
+                            <a href="{{ route('chef.dashboard') }}" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="{{ route('chef.programs') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
+                            <a href="{{ route('chef.musicians') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
+                            <a href="{{ route('chef.instruments') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
+                            <a href="{{ route('chef.history') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">History</a>
                         </div>
                     </div>
                 </div>
@@ -78,18 +79,24 @@
             </div>
         </div>
     </nav>
+    @else
+    <!-- Redirect musicians or show access denied -->
+    <script>
+        window.location.href = "{{ route('musician.dashboard') }}";
+    </script>
+    @endif
 
     <!-- Main Content -->
     <div class="flex-grow">
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <h2 class="font-playfair text-2xl font-bold text-gray-900">Conductor Dashboard</h2>
-                <button class="bg-conductor-600 hover:bg-conductor-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                <a  href="/programs" class="bg-conductor-600 hover:bg-conductor-700 text-white font-bold py-2 px-4 rounded flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
                     </svg>
                     New Program
-                </button>
+                </a>
             </div>
         </header>
 

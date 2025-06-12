@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->integer('tempo');
             $table->integer('duration');
             $table->enum('mode', ['concert', 'repetition']);
+            $table->foreignId('chef_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
 

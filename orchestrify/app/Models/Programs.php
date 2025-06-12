@@ -13,6 +13,7 @@ class Programs extends Model
         'tempo',
         'duration',
         'mode',
+        'chef_id',
     ];
 
 
@@ -22,4 +23,9 @@ class Programs extends Model
             ->withPivot('ordre', 'duree');
     }
     
+
+       public function chef()
+    {
+        return $this->belongsTo(User::class, 'chef_id');
+    }
 }
