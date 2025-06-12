@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Brigade | Simulateur d'Orchestre</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,6 +36,7 @@
         }
     </script>
 </head>
+
 <body class="bg-gray-100 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
     <!-- Navigation -->
     <nav class="bg-gray-900 text-white shadow-lg">
@@ -47,27 +51,36 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="conductor-dashboard.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
-                            <a href="#" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
-                            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">History</a>
+                            <a href="conductor-dashboard.html"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="#"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
+                            <a href="#"
+                                class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
+                            <a href="#"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
+                            <a href="#"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">History</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <button class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <button
+                            class="p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span class="sr-only">View notifications</span>
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
                         </button>
 
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
                             <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-conductor-600 flex items-center justify-center text-white font-medium">
+                                <div
+                                    class="h-8 w-8 rounded-full bg-conductor-600 flex items-center justify-center text-white font-medium">
                                     JD
                                 </div>
                                 <span class="ml-2 text-sm font-medium text-white">Jean Dupont</span>
@@ -94,7 +107,23 @@
             <div class="px-4 py-6 sm:px-0">
                 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                     <div class="px-4 py-5 sm:p-6">
-                        <form action="brigade-details.html" method="GET">
+                        <form action="{{route('brigades.store')}}" method="Post">
+                            @csrf
+                            @if(session('success'))
+                                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if($errors->any())
+                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="space-y-8 divide-y divide-gray-200">
                                 <div class="space-y-6">
                                     <div>
@@ -124,13 +153,17 @@
                                                 <select id="type" name="type" required
                                                     class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md">
                                                     <option value="">Select a type</option>
-                                                    <option value="strings">Strings</option>
-                                                    <option value="woodwinds">Woodwinds</option>
-                                                    <option value="brass">Brass</option>
-                                                    <option value="percussion">Percussion</option>
-                                                    <option value="keyboard">Keyboard</option>
-                                                    <option value="mixed">Mixed</option>
-                                                    <option value="custom">Custom</option>
+                                                    <option value="style">Select your preferred style</option>
+                                                    <option value="Classique">Classical (Classique)</option>
+                                                    <option value="Romantique">Romantic (Romantique)</option>
+                                                    <option value="Baroque">Baroque</option>
+                                                    <option value="Moderne">Modern (Moderne)</option>
+                                                    <option value="Contemporain">Contemporary (Contemporain)</option>
+                                                    <option value="Jazz">Jazz</option>
+                                                    <option value="Musique de film">Film Music (Musique de film)</option>
+                                                    <option value="Opéra">Opera (Opéra)</option>
+                                                    <option value="Symphonique">Symphonic (Symphonique)</option>
+                                                    <option value="Chambre">Chamber Music (Musique de chambre)</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -144,50 +177,42 @@
                                                     class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md"
                                                     placeholder="Describe the purpose and role of this brigade..."></textarea>
                                             </div>
-                                            <p class="mt-2 text-sm text-gray-500">Brief description of the brigade's role in the orchestra.</p>
+                                            <p class="mt-2 text-sm text-gray-500">Brief description of the brigade's
+                                                role in the orchestra.</p>
                                         </div>
 
+                                        
                                         <div class="sm:col-span-3">
-                                            <label for="min_musicians" class="block text-sm font-medium text-gray-700">
-                                                Minimum Musicians
-                                            </label>
-                                            <div class="mt-1">
-                                                <input type="number" name="min_musicians" id="min_musicians" min="1" max="50"
-                                                    class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md"
-                                                    placeholder="e.g., 4">
+                                            <div class="sm:col-span-3">
+                                                <label for="type" class="block text-sm font-medium text-gray-700">
+                                                    Instruments
+                                                </label>
+                                                <div class="mt-1">
+                                                    <select id="type" name="instruments" required
+                                                        class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <option value="">Select Brigade's instrument</option>
+                                                        @foreach ($instruments as $instrument )
+                                                        <option value="{{ $instrument->id }}">{{ $instrument->nom }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-
                                         <div class="sm:col-span-3">
-                                            <label for="max_musicians" class="block text-sm font-medium text-gray-700">
-                                                Maximum Musicians
-                                            </label>
-                                            <div class="mt-1">
-                                                <input type="number" name="max_musicians" id="max_musicians" min="1" max="100"
-                                                    class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                                    placeholder="e.g., 12">
+                                            <div class="sm:col-span-3">
+                                                <label for="type" class="block text-sm font-medium text-gray-700">
+                                                    Instruments
+                                                </label>
+                                                <div class="mt-1">
+                                                    <select id="type" name="musician_profiles_id" required
+                                                        class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <option value="">Select Brigade's instrument</option>
+                                                        @foreach ( $musicians as $musician )
+                                                        <option value="{{ $musician->id }}">{{$musician->user->name}} - {{ $musician->instrument->nom }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div class="sm:col-span-6">
-                                              <div class="sm:col-span-3">
-                                            <label for="type" class="block text-sm font-medium text-gray-700">
-                                                Brigade Type *
-                                            </label>
-                                            <div class="mt-1">
-                                                <select id="type" name="type" required
-                                                    class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md">
-                                                    <option value="">Select a type</option>
-                                                    <option value="strings">Strings</option>
-                                                    <option value="woodwinds">Woodwinds</option>
-                                                    <option value="brass">Brass</option>
-                                                    <option value="percussion">Percussion</option>
-                                                    <option value="keyboard">Keyboard</option>
-                                                    <option value="mixed">Mixed</option>
-                                                    <option value="custom">Custom</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -212,4 +237,5 @@
         </main>
     </div>
 </body>
+
 </html>
