@@ -8,30 +8,32 @@ use Illuminate\Http\Request;
 
 class BrigadeService{
 
-    public function store(Request $request){
+  public function store(Request $request)
+{
+    // Validate the request
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'type' => 'required|string|max:255',
+        'instruments' => 'required|exists:instruments,id',
+        'chef_profiles_id' => 'nullable|exists:chef_profiles,id',
+        'musician_profiles_id' => 'array',
+        'musician_profiles_id.*' => 'exists:musician_profiles,id'
+    ]);
 
-        if (!Auth::user() || Auth::user()->role !== 'chef') {
-            abort(403, 'Unauthorized action.');
-        }
+    // Create the brigade without the musician_profiles_id array
+    $brigadeData = $validated;
+    unset($brigadeData['musician_profiles_id']); // Remove the array from direct insertion
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'type' => 'required|string|max:255',
-            'instruments' => 'required|string|max:255',
-            'chef_profiles_id' => 'nullable|exists:chef_profiles,id',
-            'musician_profiles_id' => 'required|exists:musician_profiles,id',
-        ]);
+    $brigade = Brigade::create($brigadeData);
 
-        Brigade::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
-            'type' => $validated['type'],
-            'instruments' => $validated['instruments'],
-            'chef_profiles_id' => $validated['chef_profiles_id'] ?? Auth::id(),
-            'musician_profiles_id' => $validated['musician_profiles_id'],
-        ]);
+    // Handle the many-to-many relationship for musicians
+    if (isset($validated['musician_profiles_id'])) {
+        $brigade->musicians()->attach($validated['musician_profiles_id']);
     }
+
+    return $brigade;
+}
 
 
     public function  getAllBrigades()

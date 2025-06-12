@@ -201,17 +201,18 @@
                                         <div class="sm:col-span-3">
                                             <div class="sm:col-span-3">
                                                 <label for="type" class="block text-sm font-medium text-gray-700">
-                                                    Instruments
+                                                    musicians
                                                 </label>
                                                 <div class="mt-1">
-                                                    <select id="type" name="musician_profiles_id" required
+                                                    <select id="type" name="musician_profiles_id[]" multiple required
                                                         class="shadow-sm focus:ring-conductor-500 border p-2 border-grey-800 block w-full sm:text-sm border-gray-300 rounded-md">
-                                                        <option value="">Select Brigade's instrument</option>
+                                                        <option value="">Select Brigade's musicians</option>
                                                         @foreach ( $musicians as $musician )
                                                         <option value="{{ $musician->id }}">{{$musician->user->name}} - {{ $musician->instrument->nom }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <p class="mt-2 text-sm text-gray-500">Hold Ctrl (Windows) or Command (Mac) to select multiple musicians</p>
                                             </div>
                                         </div>
                                     </div>
@@ -239,3 +240,37 @@
 </body>
 
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const musicianSelect = document.querySelector('select[name="musician_profiles_id[]"]');
+    
+    // Add styling for better UX
+    musicianSelect.style.height = '120px';
+    
+    // Optional: Add select all functionality
+    const selectAllBtn = document.createElement('button');
+    selectAllBtn.type = 'button';
+    selectAllBtn.textContent = 'Select All';
+    selectAllBtn.className = 'mb-2 px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm';
+    
+    selectAllBtn.addEventListener('click', function() {
+        Array.from(musicianSelect.options).forEach(option => {
+            if (option.value !== '') option.selected = true;
+        });
+    });
+    
+    const clearAllBtn = document.createElement('button');
+    clearAllBtn.type = 'button';
+    clearAllBtn.textContent = 'Clear All';
+    clearAllBtn.className = 'mb-2 ml-2 px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm';
+    
+    clearAllBtn.addEventListener('click', function() {
+        Array.from(musicianSelect.options).forEach(option => {
+            option.selected = false;
+        });
+    });
+    
+    musicianSelect.parentNode.insertBefore(selectAllBtn, musicianSelect);
+    musicianSelect.parentNode.insertBefore(clearAllBtn, musicianSelect);
+});
+</script>

@@ -13,21 +13,24 @@ class Brigade extends Model
         'type',
         'instruments',
         'chef_profiles_id',
-        'musician_profiles_id',
+
     ];
+
 
 
     public function chefProfile()
     {
-        return $this->belongsTo(User::class, 'chef_profiles_id');
+
+        return $this->belongsTo(ChefProfile::class, 'chef_profiles_id');
     }
     
     public function musicians()
     {
-        return $this->belongsTo(MusicianProfile::class, 'musician_profiles_id');
+
+        return $this->belongsToMany(MusicianProfile::class, 'brigade_musician', 'brigade_id', 'musician_profile_id');
     }
 
-    public function instruments()
+       public function instruments()
     {
         return $this->belongsTo(Instruments::class, 'instruments');
     }

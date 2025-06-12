@@ -48,14 +48,38 @@ class brigadeController extends Controller
 
 
 
-     public function store(Request $request)
-    {
-       $this->brigadeService->store($request);
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'type' => 'required|string|max:255',
+        'instruments' => 'required|exists:instruments,id',
+        'chef_profiles_id' => 'nullable|exists:chef_profiles,id',
+        'musician_profiles_id' => 'array',
+        'musician_profiles_id.*' => 'exists:musician_profiles,id'
+    ]);
 
-        return redirect()->route('brigades.index')->with('success', 'Brigade created successfully.');
+    // Create brigade without the musicians array
+    $brigadeData = collect($validated)->except('musician_profiles_id')->toArray();
+    $brigade = Brigade::create($brigadeData);
+
+    // Attach musicians to the brigade
+    if ($request->has('musician_profiles_id')) {
+        $brigade->musicians()->attach($request->musician_profiles_id);
     }
 
+    return redirect()->route('brigades.index')->with('success', 'Brigade created successfully.');
+}
 
+
+
+    public function delete($id)
+{
+    $brigade = Brigade::findOrFail($id);
+    $brigade->delete();
+    return redirect()->back()->with('success', 'Brigade deleted successfully.');
+}
 
 
 
