@@ -31,6 +31,10 @@ class MusicianProfileController extends Controller
     //     return view('musicianslist', compact('profiles'));
     // }
 
+    public function getMusicians(){
+        $musicians = $this->musicianService->getAllProfiles();
+        return view('musicianslist', compact('musicians'));
+    }
 
     public function store(Request $request)
     {

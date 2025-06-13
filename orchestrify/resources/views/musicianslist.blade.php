@@ -47,28 +47,32 @@
 </head>
 
 <body class="bg-black text-white font-sans antialiased min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-gray-900 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <h1 class="text-xl font-playfair font-bold tracking-wider">
-                        <span class="text-white">Musicians</span>
-                        <span class="text-gray-400">Directory</span>
-                    </h1>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="index.html" class="text-gray-300 hover:text-white text-sm">Instruments</a>
-                    <a href="orchestra-members.html" class="text-gray-300 hover:text-white text-sm">Members</a>
-                    <a href="musicians-list.html" class="text-white text-sm font-medium">Musicians</a>
-                    <button
-                        class="px-4 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-gray-800 transition-colors duration-300">
-                        Logout
-                    </button>
+   @if(auth()->user()->isChef())
+    <nav class="bg-gray-900 text-white shadow-lg">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6  lg:px-8">
+            <div class="flex items-center justify-center h-16">
+               
+                <div class="flex ">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="{{ route('home') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="{{ route('chef.dashboard') }}" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="{{ route('chef.programs') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
+                            <a href="{{ route('chef.musicians') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
+                            <a href="{{ route('chef.instruments') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
+    @else
+    <!-- Redirect musicians or show access denied -->
+    <script>
+        window.location.href = "{{ route('musician.dashboard') }}";
+    </script>
+    @endif
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -46,5 +46,11 @@ class InstrumentService
         $instrument->delete();
     }
 
+
+    public function getInstrumentsByMusicianId($musicianId)
+    {
+        return MusicianProfile::findOrFail($musicianId)->instruments;
+    }
+
 }
 

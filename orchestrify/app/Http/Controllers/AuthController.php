@@ -99,7 +99,7 @@ class AuthController extends Controller
 
         Auth::logout();
         session()->flash('success', 'Logout successful!');
-        return view('/home');
+        return view('login');
     }
 
 

@@ -44,6 +44,32 @@
 </head>
 
 <body class="bg-gray-900 min-h-screen text-white">
+     @if(auth()->user()->isChef())
+    <nav class="bg-gray-900 text-white shadow-lg">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6  lg:px-8">
+            <div class="flex items-center justify-center h-16">
+               
+                <div class="flex ">
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="{{ route('home') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="{{ route('chef.dashboard') }}" class="bg-gray-800 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="{{ route('chef.programs') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
+                            <a href="{{ route('chef.musicians') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
+                            <a href="{{ route('chef.instruments') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    @else
+    <!-- Redirect musicians or show access denied -->
+    <script>
+        window.location.href = "{{ route('musician.dashboard') }}";
+    </script>
+    @endif
     <div class="max-w-4xl mx-auto p-6">
         <!-- Header -->
         <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 mb-8 text-white shadow-2xl">

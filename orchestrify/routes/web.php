@@ -6,6 +6,7 @@ use App\Http\Controllers\ChefDashboardController;
 use App\Http\Controllers\ChefFormController;
 use App\Http\Controllers\ChefProfileController;
 use App\Http\Controllers\InstrumentsController;
+use App\Http\Controllers\musicianDashboardController;
 use App\Http\Controllers\MusicianFormController;
 use App\Http\Controllers\MusicianProfileController;
 use App\Http\Controllers\ProgramsController;
@@ -49,13 +50,6 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
 
     Route::get('musicians', [MusicianProfileController::class, 'getMusicians'])->name('musicians.index');
 
-});
-
-Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
-Route::get('/redirecting', [AuthController::class, 'checkProfileAndRedirect'])->name('redirecting');
-
-// Add these routes if they don't exist
-Route::middleware(['auth', 'role:chef'])->group(function () {
     Route::get('/chef/dashboard', [ChefDashboardController::class, 'stats'])->name('chef.dashboard');
     Route::get('/chef/programs', [ProgramsController::class, 'index'])->name('chef.programs');
     Route::get('/chef/musicians', [MusicianProfileController::class, 'getMusicians'])->name('chef.musicians');
@@ -65,6 +59,10 @@ Route::middleware(['auth', 'role:chef'])->group(function () {
     })->name('chef.history');
 });
 
+Route::get('/musicianProfiles', [MusicianProfileController::class, 'getUsers'])->name('musicianProfiles');
+Route::get('/redirecting', [AuthController::class, 'checkProfileAndRedirect'])->name('redirecting');
+
+
 Route::get('brigades', [brigadeController::class, 'index'])->name('brigades.index');
 Route::post('brigades', [brigadeController::class, 'store'])->name('brigades.store');
 Route::delete('brigades/{id}', [brigadeController::class, 'delete'])->name('brigades.destroy');
@@ -72,3 +70,6 @@ Route::put('brigades/{id}', [brigadeController::class, 'update'])->name('brigade
 // Route::get('brigade/details', [brigadeController::class, 'details'])->name('brigades.details');
 Route::get('brigades/{id}', [brigadeController::class, 'details'])->name('brigades.details');
 Route::get('brigades/{id}/show', [brigadeController::class, 'show'])->name('brigades.show');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/page', [MusicianDashboardController::class , 'index'])->name('test');

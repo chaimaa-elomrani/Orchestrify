@@ -80,51 +80,108 @@
 
 <body class="bg-black text-white font-sans antialiased">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h1 class="text-2xl font-playfair font-bold tracking-wider">
-                            <span class="text-white">Simulateur</span>
-                            <span class="text-gray-400">d'Orchestre</span>
-                        </h1>
+    @if(auth()->check() && auth()->user()->isChef())
+        <!-- Chef Navigation -->
+        <nav class="fixed w-full z-50 bg-gray-900 text-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h1 class="text-2xl font-playfair font-bold tracking-wider">
+                                <span class="text-white">Simulateur</span>
+                                <span class="text-gray-400">d'Orchestre</span>
+                            </h1>
+                        </div>
                     </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#"
-                            class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Home</a>
-                        <a href="#about"
-                            class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">About</a>
-                        <a href="#how-it-works"
-                            class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">How
-                            It Works</a>
-                        <a href="#"
-                            class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Features</a>
-                        <a href="#"
-                            class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Contact</a>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="{{ route('home') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="{{ route('chef.dashboard') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            <a href="{{ route('chef.programs') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Programs</a>
+                            <a href="{{ route('chef.musicians') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Musicians</a>
+                            <a href="{{ route('chef.instruments') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instruments</a>
+                        </div>
                     </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="flex items-center space-x-4">
-                        <a href="/login"
-                            class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300">Login</a>
-                        <a href="/register"
-                            class="px-5 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors duration-300">Register</a>
+                    <div class="hidden md:block">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-300">Welcome, {{ auth()->user()->name }}</span>
+                            <form method="GET" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit" class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300 inline-block">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="md:hidden">
-                    <button type="button" class="text-gray-400 hover:text-white focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                    <div class="md:hidden">
+                        <button type="button" class="text-gray-400 hover:text-white focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    @else
+        <!-- Default Navigation -->
+        <nav class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h1 class="text-2xl font-playfair font-bold tracking-wider">
+                                <span class="text-white">Simulateur</span>
+                                <span class="text-gray-400">d'Orchestre</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-8">
+                            <a href="#"
+                                class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Home</a>
+                            <a href="#about"
+                                class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">About</a>
+                            <a href="#how-it-works"
+                                class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">How
+                                It Works</a>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Features</a>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-300">Contact</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="flex items-center space-x-4">
+                            @auth
+                                <span class="text-sm text-gray-300">Welcome, {{ auth()->user()->name }}</span>
+                                <form method="POST" action="{{ route('logout') }}" class="inline">
+                                    @csrf
+                                    <button type="submit" class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300">
+                                        Logout
+                                    </button>
+                                </form>
+                            @else
+                                <a href="/login"
+                                    class="px-5 py-2 text-sm font-medium text-white border border-gray-600 rounded-md hover:bg-white hover:text-black transition-colors duration-300">Login</a>
+                                <a href="/register"
+                                    class="px-5 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors duration-300">Register</a>
+                            @endauth
+                        </div>
+                    </div>
+                    <div class="md:hidden">
+                        <button type="button" class="text-gray-400 hover:text-white focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    @endif
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -146,10 +203,24 @@
             </p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-fade-in"
                 style="animation-delay: 0.6s">
-                <a href="register.html"
-                    class="px-8 py-4 text-lg font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
-                    Start Conducting
-                </a>
+                @auth
+                    @if(auth()->user()->isChef())
+                        <a href="{{ route('chef.dashboard') }}"
+                            class="px-8 py-4 text-lg font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                            Go to Dashboard
+                        </a>
+                    @else
+                        <a href="#"
+                            class="px-8 py-4 text-lg font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                            Start Playing
+                        </a>
+                    @endif
+                @else
+                    <a href="register.html"
+                        class="px-8 py-4 text-lg font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                        Start Conducting
+                    </a>
+                @endauth
                 <a href="#how-it-works"
                     class="px-8 py-4 text-lg font-medium text-white border border-white rounded-md hover:bg-white hover:text-black transition-all duration-300">
                     Learn More

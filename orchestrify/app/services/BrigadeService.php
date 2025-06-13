@@ -71,4 +71,12 @@ class BrigadeService{
             'musician_profiles_id' => $validated['musician_profiles_id'],
         ]);
     }
+
+
+    public function getBrigadeByUserId($userId)
+    {
+        return Brigade::where('chef_profiles_id', $userId)
+            ->with(['chefProfile', 'musicians'])
+            ->get();
+    }
 }
